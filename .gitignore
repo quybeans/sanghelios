@@ -1,18 +1,11 @@
-# Created by .ignore support plugin (hsz.mobi)
-### SBT template
-# Simple Build Tool
-# http://www.scala-sbt.org/release/docs/Getting-Started/Directories.html#configuring-version-control
+# OS cache files
+.DS_Store
 
-dist/*
+# IDE files
+/.idea/
+
+# Output and build files
 target/
-lib_managed/
-src_managed/
-project/boot/
-project/plugins/project/
-.history
-.cache
-.lib/
-### Scala template
-*.class
-*.log
 
+# To maintain directory structure
+!.keep
