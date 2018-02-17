@@ -3,6 +3,7 @@
 package com.helios.service
 
 import com.helios.facebook.page.FbPageService
+import com.helios.facebook.page.protocols.FbPage
 import monix.eval.Task
 import monix.execution.Scheduler
 
@@ -12,7 +13,7 @@ final class SocialAccountService(
   val ec: Scheduler
 ) {
 
-  def getAllAccounts(token: String): Task[String] = {
+  def getAllAccounts(token: String): Task[Seq[FbPage]] = {
     fbPage.getAllFbPage(token)
   }
 }

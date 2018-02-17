@@ -13,6 +13,7 @@ import com.helios.server.generic.HeliosServer
 import monix.execution.Scheduler
 import akka.http.scaladsl.server.Directives._
 import com.helios.server.account.protocols.GetAllFbPageRequest
+import com.helios.server.account.protocols.GetAllFbPageResponse
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport._
 import io.circe.generic.auto._
 
@@ -25,7 +26,7 @@ final class AccountServer(
 
   val route: Route = (post & path("page") & entity(as[GetAllFbPageRequest])) { request =>
     onComplete(socials.account.getAllAccounts(request.accessToken).runAsync) {
-      case Success(response) => complete(response)
+      case Success(response) => complete(GetAllFbPageResponse(response))
       case Failure(ex) => throw ex
     }
   }

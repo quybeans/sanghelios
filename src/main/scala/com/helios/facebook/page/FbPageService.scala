@@ -15,8 +15,8 @@ final class FbPageService(
   val scheduler: Scheduler
 ) {
 
-  def getAllFbPage(token: String): Task[String] = {
+  def getAllFbPage(token: String): Task[Seq[FbPage]] = {
     fbHttp.get[GetAccountsResponse]("me/accounts/", "access_token" -> token)
-      .map(_.toString)
+      .map(_.data)
   }
 }
