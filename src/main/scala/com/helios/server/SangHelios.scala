@@ -8,8 +8,10 @@ import akka.http.scaladsl.HttpExt
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.stream.ActorMaterializer
+import ch.megard.akka.http.cors.scaladsl.CorsDirectives._
 import monix.execution.Scheduler
 import monix.execution.Scheduler.Implicits.global
+
 
 object SangHelios extends App with Servers {
 
@@ -18,6 +20,6 @@ object SangHelios extends App with Servers {
   lazy implicit val ec: Scheduler = global
   lazy implicit val httpExt: HttpExt = Http()
 
-  val route = routes.foldLeft[Route](reject)(_ ~ _)
+  val route = cors()(routes.foldLeft[Route](reject)(_ ~ _))
   Http().bindAndHandle(Route.handlerFlow(route), "0.0.0.0", 3012)
 }
